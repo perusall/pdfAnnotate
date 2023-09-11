@@ -899,8 +899,8 @@ export class PDFDocumentParser {
                         throw Error("Reference pointer not set in resource definition")
                     }
 
-                    if (!this.fontManager.hasFont(resDef.refPtr)) {
-                        let font = FontParser.extract(this.data, obj_table[resDef.refPtr.obj], obj_table, resDef.name)
+                    if (!this.fontManager.hasFont(resDef.refPtr) && resDef.refPtr?.obj) {
+                        let font = FontParser.extract(this.data, obj_table[resDef.refPtr.obj], obj_table, resDef.name);
                         font.object_id = resDef.refPtr
                         this.fontManager.addFont(font)
                     }
@@ -918,7 +918,7 @@ export class PDFDocumentParser {
                         throw Error("Reference pointer not set in resource definition")
                     }
 
-                    if (!this.fontManager.hasFont(resDef.refPtr)) {
+                    if (!this.fontManager.hasFont(resDef.refPtr) && resDef.refPtr?.obj) {
                         let font = FontParser.extract(this.data, obj_table[resDef.refPtr.obj], obj_table, resDef.name)
                         font.object_id = resDef.refPtr
                         this.fontManager.addFont(font)
